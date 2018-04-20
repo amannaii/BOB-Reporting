@@ -11,6 +11,13 @@
 	href="../../css/main.css" />
 
 </head>
+<style>
+hr.style-four {
+    height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+}
+</style>
 <body>
 
 	<nav class="navbar navbar-inverse">
@@ -30,10 +37,39 @@
 	<div class="container">
 
 		<div class="starter-template">
-			<h1>Spring Boot Web Thymeleaf Example</h1>
-			<h2>
-				<span th:text="'Message: ' + ${message}"></span>
+			<h1>BOB Reporting</h1>
+			 <h2>
+				<span th:text="'Nombre de programme d appel: ' +${totalCallPrograms}"></span>
 			</h2>
+			 <h3>
+				<span th:text="'Nombre de programme d appel: ' +${totalCallPrograms}"></span>
+			</h3>
+			
+
+			<table style="width: 100%; display: table-header-group">
+				<tr >
+					<th>Id programme d'appel</th>
+					<th>Nombre de chronique enregistré</th>
+				</tr>
+				<tr th:each="callProgram : ${callPrograms}">
+					<td><span th:text= "${callProgram.id}"></td> 
+					<td><span th:text="${callProgram.chronicalTotal}"></td>
+				</tr>
+			</table>
+			<hr class="style-four">
+ 			<table style="width: 100%; display: table-header-group">
+				<tr >
+					<th>Identifiant programme d'appel</th>
+					<th>Identifiant chronique enregistrée</th>
+					<th>Nombre de points de la chronique enregistrée</th>
+				</tr>
+				<tr th:each="chronic : ${chronics}">
+					<td><span th:text= "${chronic.programmeappel_id}"></td>
+					<td><span th:text="${chronic.id}"></td>
+					<td><span th:text="${chronic.pointsTotal}"></td>
+				</tr>
+			</table>
+			
 		</div>
 
 	</div>

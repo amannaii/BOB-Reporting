@@ -26,11 +26,11 @@ public class BobReportingApplication implements CommandLineRunner {
     @Autowired
     CallProgramRepository callProgramRepository;
     
-    @Autowired
-    ChronicleRepository chronicleRepository;
-    
-    @Autowired
-    PointRepository pointRepository;
+//    @Autowired
+//    ChronicleRepository chronicleRepository;
+//    
+//    @Autowired
+//    PointRepository pointRepository;
     
 	public static void main(String[] args) {
 		SpringApplication.run(BobReportingApplication.class, args);
@@ -45,16 +45,16 @@ public class BobReportingApplication implements CommandLineRunner {
         for (CallProgram callProgram : callProgramRepository.findAll()) {
             System.out.println(callProgram.getPa_sender_name());
         }
-        System.out.println("\n1.CHRONICLE...");
-        for (Chronicle Chronicle : chronicleRepository.findAll()) {
-            System.out.println(Chronicle.getPac_mrid());
-        }
-        System.out.println("\n1.POINT...");
-        for (Point point : pointRepository.findAll()) {
-            System.out.println(point.getPosition());
-        }
+//        System.out.println("\n1.CHRONICLE...");
+//        for (Chronicle Chronicle : chronicleRepository.findAll()) {
+//            System.out.println(Chronicle.getPac_mrid());
+//        }
+//        System.out.println("\n1.POINT...");
+//        for (Point point : pointRepository.findAll()) {
+//            System.out.println(point.getPosition());
+//        }
         System.out.println("Done!");
 
-        exit(0);
+       // exit(0);
     }
 }

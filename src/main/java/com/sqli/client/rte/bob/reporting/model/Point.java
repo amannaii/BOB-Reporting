@@ -12,7 +12,14 @@ public class Point {
 	private long id;
 	private int position;
 	private int quantity;
+	private long chronicle_id;
 	
+	public long getChronicle_id() {
+		return chronicle_id;
+	}
+	public void setChronicle_id(long chronicle_id) {
+		this.chronicle_id = chronicle_id;
+	}
 	public long getId() {
 		return id;
 	}

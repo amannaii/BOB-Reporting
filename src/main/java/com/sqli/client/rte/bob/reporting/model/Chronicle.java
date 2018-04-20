@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Chronicle {
@@ -17,8 +18,24 @@ public class Chronicle {
     private String pac_mrid;
 	private String pac_resolution;
     private String pac_type;
+    private long programmeappel_id;
     
-    public long getId() {
+	@Transient
+	private int pointsTotal;
+	
+    public int getPointsTotal() {
+		return pointsTotal;
+	}
+	public void setPointsTotal(int pointsTotal) {
+		this.pointsTotal = pointsTotal;
+	}
+	public long getProgrammeappel_id() {
+		return programmeappel_id;
+	}
+	public void setProgrammeappel_id(long programmeappel_id) {
+		this.programmeappel_id = programmeappel_id;
+	}
+	public long getId() {
 		return id;
 	}
 	public void setId(long id) {

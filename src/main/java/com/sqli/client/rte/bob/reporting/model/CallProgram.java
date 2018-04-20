@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "topase_programappel")
@@ -19,6 +20,16 @@ public class CallProgram {
 	private String pa_registred_ressource;
 	private String pa_sender_eic;
 	private String pa_sender_name;
+
+	@Transient
+	private int chronicalTotal;
+	
+	public int getChronicalTotal() {
+		return chronicalTotal;
+	}
+	public void setChronicalTotal(int chronicalTotal) {
+		this.chronicalTotal = chronicalTotal;
+	}
 	public long getId() {
 		return id;
 	}
