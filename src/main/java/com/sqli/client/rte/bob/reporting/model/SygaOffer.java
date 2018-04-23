@@ -7,7 +7,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE) 
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS) 
 @Table(name = "bob_syga_offre_specifique")
 public class SygaOffer {
 	@Id
