@@ -17,8 +17,6 @@ import com.sqli.client.rte.bob.reporting.dao.PointRepository;
 import com.sqli.client.rte.bob.reporting.model.CallProgram;
 import com.sqli.client.rte.bob.reporting.model.Chronicle;
 import com.sqli.client.rte.bob.reporting.model.SygaBatchExecution;
-import com.sqli.client.rte.bob.reporting.model.SygaOfferErroneous;
-import com.sqli.client.rte.bob.reporting.model.SygaOfferRejected;
 @Controller
 public class WelcomeController {
 
@@ -38,7 +36,6 @@ public class WelcomeController {
     @Autowired
     BatchRepository batchRepository;
     
-	private int totalcallPrograms;
 	private List<CallProgram> callPrograms = new ArrayList<CallProgram>();
 	private List<Chronicle> chronics = new ArrayList<Chronicle>();
 	private List<SygaBatchExecution> sygaBatchExecutions = new ArrayList<SygaBatchExecution>();
