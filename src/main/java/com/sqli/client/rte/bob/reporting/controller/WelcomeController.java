@@ -20,9 +20,7 @@ import com.sqli.client.rte.bob.reporting.model.SygaBatchExecution;
 @Controller
 public class WelcomeController {
 
-	// inject via application.properties
-	@Value("${welcome.message:test}")
-	private String message = "Hello World";
+	private static final String SYGA_BATCH = "syga";
 	
     @Autowired
     CallProgramRepository callProgramRepository;
@@ -71,7 +69,7 @@ public class WelcomeController {
 		//-------------Syga batch execution Report-------------------------------------
 		//-----------------------------------------------------------------------------
 
-		List <Object[]> sygaOffers= batchRepository.getSygaOffers("topase", BatchStatus.COMPLETED.toString());
+		List <Object[]> sygaOffers= batchRepository.getSygaOffers(SYGA_BATCH, BatchStatus.COMPLETED.toString());
 		for (int i =0; i< sygaOffers.size(); i++) {
 			SygaBatchExecution sygaBatchExecution = new SygaBatchExecution();
 			sygaBatchExecution.setBatch_id((Long) sygaOffers.get(i)[0]);
@@ -81,7 +79,7 @@ public class WelcomeController {
 			}
 		model.put("batchExecutions", sygaBatchExecutions);
 		
-		List <Object[]> sygaRejectedOffers= batchRepository.getSygaRejectedOffers("topase", BatchStatus.COMPLETED.toString());
+		List <Object[]> sygaRejectedOffers= batchRepository.getSygaRejectedOffers(SYGA_BATCH, BatchStatus.COMPLETED.toString());
 		for (int i =0; i< sygaRejectedOffers.size(); i++) {
 			SygaBatchExecution sygaBatchExecution = new SygaBatchExecution();
 			sygaBatchExecution.setBatch_id((Long) sygaRejectedOffers.get(i)[0]);
@@ -91,7 +89,7 @@ public class WelcomeController {
 			}
 		model.put("sygaBatchRejectedOffers", sygaBatchRejectedOffers);
 		
-		List <Object[]> sygaErroneousOffers= batchRepository.getSygaErrorneousOffers("topase", BatchStatus.COMPLETED.toString());
+		List <Object[]> sygaErroneousOffers= batchRepository.getSygaErrorneousOffers(SYGA_BATCH, BatchStatus.COMPLETED.toString());
 		for (int i =0; i< sygaErroneousOffers.size(); i++) {
 			SygaBatchExecution sygaBatchExecution = new SygaBatchExecution();
 			sygaBatchExecution.setBatch_id((Long) sygaErroneousOffers.get(i)[0]);
