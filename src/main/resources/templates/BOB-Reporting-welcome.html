@@ -4,8 +4,8 @@
 <title>Spring Boot Thymeleaf Hello World Example</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<link rel="stylesheet" type="text/css"
-	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+ <link rel="stylesheet" type="text/css"
+	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen" /> 
 
 <link rel="stylesheet" th:href="@{/css/main.css}"
 	href="../../css/main.css" />
@@ -19,7 +19,11 @@ hr.style-four {
 }
 </style>
 <body>
-
+<script src="http://code.jquery.com/jquery.js"></script>
+    <script src="webjars/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
+        <button type="button" class="btn btn-success">This is a success button</button>
+    
 	<nav class="navbar navbar-inverse">
 		<div class="container">
 			<div class="navbar-header">
@@ -56,6 +60,38 @@ hr.style-four {
 					<td><span th:text="${callProgram.chronicalTotal}"></td>
 				</tr>
 			</table>
+			
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">First</th>
+						<th scope="col">Last</th>
+						<th scope="col">Handle</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">1</th>
+						<td>Mark</td>
+						<td>Otto</td>
+						<td>@mdo</td>
+					</tr>
+					<tr>
+						<th scope="row">2</th>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>@fat</td>
+					</tr>
+					<tr>
+						<th scope="row">3</th>
+						<td>Larry</td>
+						<td>the Bird</td>
+						<td>@twitter</td>
+					</tr>
+				</tbody>
+			</table>
+
 			<hr class="style-four">
  			<table style="width: 100%; display: table-header-group">
 				<tr >
@@ -69,7 +105,54 @@ hr.style-four {
 					<td><span th:text="${chronic.pointsTotal}"></td>
 				</tr>
 			</table>
-			
+			<hr class="style-four">
+			 <h2>
+		 		<span th:text="'Nombre d offre enregistrees suite a l execution du Batch Syga'"></span>
+			</h2>
+			<table style="width: 100%; display: table-header-group">
+				<tr >
+					<th>Identifiant du Syga batch</th>
+					<th>Syga batch start time</th>
+					<th>Nombre des offres enregistrées</th>
+				</tr>
+				<tr th:each="batchExecution : ${batchExecutions}">
+					<td><span th:text= "${batchExecution.batch_id}"></td>
+					<td><span th:text="${batchExecution.start_time}"></td>
+					<td><span th:text="${batchExecution.total_offers}"></td>
+				</tr>
+			</table>
+				<hr class="style-four">
+			  <h2>
+		 		 <span th:text="'Nombre d offre rejetees enregistrees suite a l execution du Batch Syga'"></span> 
+			</h2>
+			<table style="width: 100%; display: table-header-group">
+				<tr >
+					<th>Identifiant du Syga batch</th>
+					<th>Syga batch start time</th>
+					<th>Nombre des offres enregistrées</th>
+				</tr>
+				<tr th:each="sygaBatchRejectedOffer : ${sygaBatchRejectedOffers}">
+					<td><span th:text= "${sygaBatchRejectedOffer.batch_id}"></td>
+					<td><span th:text="${sygaBatchRejectedOffer.start_time}"></td>
+					<td><span th:text="${sygaBatchRejectedOffer.total_offers}"></td>
+				</tr>
+			</table>
+				<hr class="style-four">
+			 <h2>
+				<span th:text="'Nombre d offre errones enregistrees suite a l execution du Batch Syga'"></span>
+			</h2>
+			<table style="width: 100%; display: table-header-group">
+				<tr >
+					<th>Identifiant du Syga batch</th>
+					<th>Syga batch start time</th>
+					<th>Nombre des offres enregistrées</th>
+				</tr>
+				<tr th:each="sygaBatchErroneousOffer : ${sygaBatchErroneousOffers}">
+					<td><span th:text= "${sygaBatchErroneousOffer.batch_id}"></td>
+					<td><span th:text="${sygaBatchErroneousOffer.start_time}"></td>
+					<td><span th:text="${sygaBatchErroneousOffer.total_offers}"></td>
+				</tr>
+			</table>
 		</div>
 
 	</div>

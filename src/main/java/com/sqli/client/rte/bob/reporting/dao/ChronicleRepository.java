@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.sqli.client.rte.bob.reporting.model.CallProgram;
 import com.sqli.client.rte.bob.reporting.model.Chronicle;
 
 public interface ChronicleRepository extends JpaRepository<Chronicle, Long> {
