@@ -14,6 +14,16 @@ public class EcpSeriesPeriod {
 	private String end_date;
 	private String resolution;
 	private String start_date;
+	private Long ecptimeseries_id;
+	
+	
+	
+	public Long getEcptimeseries_id() {
+		return ecptimeseries_id;
+	}
+	public void setEcptimeseries_id(Long ecptimeseries_id) {
+		this.ecptimeseries_id = ecptimeseries_id;
+	}
 	public long getId() {
 		return id;
 	}

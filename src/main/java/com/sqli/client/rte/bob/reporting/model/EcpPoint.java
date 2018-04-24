@@ -23,6 +23,17 @@ public class EcpPoint {
 	private java.math.BigDecimal quantiy;
 	private java.math.BigDecimal secondary_quatity;
 	private java.math.BigDecimal unavalaible_quantity;
+	//private Long ecpseriesperiod_id;
+	
+	
+	/*
+	public Long getEcpseriesperiod_id() {
+		return ecpseriesperiod_id;
+	}
+	public void setEcpseriesperiod_id(Long ecpseriesperiod_id) {
+		this.ecpseriesperiod_id = ecpseriesperiod_id;
+	}
+	*/
 	public long getId() {
 		return id;
 	}

@@ -25,6 +25,16 @@ public class EcpTimeSeries {
 	private String quantity_measure_unit;
 	private String standard_market_product_type;
 	private String type_market_agreement_type;
+	private Long ecpmarketdocument_id;
+	
+	
+	
+	public Long getEcpmarketdocument_id() {
+		return ecpmarketdocument_id;
+	}
+	public void setEcpmarketdocument_id(Long ecpmarketdocument_id) {
+		this.ecpmarketdocument_id = ecpmarketdocument_id;
+	}
 	public long getId() {
 		return id;
 	}

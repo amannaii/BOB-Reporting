@@ -154,6 +154,27 @@ hr.style-four {
 					<td><span th:text="${ecpMarketDocument.total_offers}"></td>
 				</tr>
 			</table>
+			
+			
+			<div class="p-3 mb-2 bg-primary text-white">
+			
+			<h2>
+				<span
+					th:text="'Nombre d\'enregistrements dans ECP MARKET DOCUMENT suite a l\'éxecution du Batch ECP'"></span>
+			</h2>
+			</div>
+			<table class="table table-striped">
+				<tr>
+					<th>Identifiant du Ecp batch</th>
+					<th>Ecp batch start time</th>
+					<th>Nombre d'enregistrement</th>
+				</tr>
+				<tr th:each="ecpTimeSerie : ${ecpTimeSeries}">
+					<td><span th:text="${ecpTimeSerie.batch_id}"></td>
+					<td><span th:text="${ecpTimeSerie.start_time}"></td>
+					<td><span th:text="${ecpTimeSerie.total_offers}"></td>
+				</tr>
+			</table>
 	</div>
 
 	<script type="text/javascript"

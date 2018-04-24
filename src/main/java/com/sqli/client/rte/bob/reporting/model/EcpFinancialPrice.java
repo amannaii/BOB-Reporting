@@ -16,6 +16,13 @@ public class EcpFinancialPrice {
 	
 	private Double amount;
 	private String price_direction;
+	private Long ecppoint_id;
+	public Long getEcppoint_id() {
+		return ecppoint_id;
+	}
+	public void setEcppoint_id(Long ecppoint_id) {
+		this.ecppoint_id = ecppoint_id;
+	}
 	public long getId() {
 		return id;
 	}
