@@ -227,6 +227,34 @@ hr.style-four {
 				<td><span th:text="${ecpPoint.ecp_point_Total}"></td>
 			</tr>
 		</table>
+		
+		<div class="p-3 mb-2 bg-primary text-white">
+
+			<h2>
+				<span
+					th:text="'Nombre d\'enregistrements des EcpFinancialPrice pour chaque EcpPoint'"></span>
+			</h2>
+		</div>
+		<table class="table table-striped">
+			<tr>
+				<th>Identifiant du Ecp batch</th>
+				<th>Ecp batch start time</th>
+				<th>Identifiant du Ecp Document</th>
+				<th>Identifiant du Ecp Time Series</th>
+				<th>Identifiant du Ecp Series Period</th>
+				<th>Identifiant du Ecp Point</th>
+				<th>Nombre de EcpFinancialPrice enregistrés</th>
+			</tr>
+			<tr th:each="ecpFinancialPrice : ${ecpFinancialPrices}">
+				<td><span th:text="${ecpFinancialPrice.batch_id}"></td>
+				<td><span th:text="${ecpFinancialPrice.start_time}"></td>
+				<td><span th:text="${ecpFinancialPrice.ecp_document_id}"></td>
+				<td><span th:text="${ecpFinancialPrice.ecp_timeseries_id}"></td>
+				<td><span th:text="${ecpFinancialPrice.ecp_seriesperiod_id}"></td>
+				<td><span th:text="${ecpFinancialPrice.ecp_point_id}"></td>
+				<td><span th:text="${ecpFinancialPrice.ecp_financialprice_Total}"></td>
+			</tr>
+		</table>
 	</div>
 
 	<script type="text/javascript"

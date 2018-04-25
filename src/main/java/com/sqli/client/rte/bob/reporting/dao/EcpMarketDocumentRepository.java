@@ -50,8 +50,20 @@ public interface EcpMarketDocumentRepository extends JpaRepository<EcpMarketDocu
 			+ "INNER JOIN EcpTimeSeries ts ON md.id = ts.ecpmarketdocument_id "
 			+ "INNER JOIN EcpSeriesPeriod sp ON ts.id = sp.ecptimeseries_id "
 			+ "INNER JOIN EcpPoint ep ON sp.id = ep.ecpseriesperiod_id "
-			+ "group by  b.job_instance_id, md.id, ts.id,sp.id";
+			+ "group by b.job_instance_id, md.id, ts.id,sp.id";
 
 	@Query(ecppoint_query)
 	List<Object[]> getEcpPoint(@Param("batchName") String batchName, @Param("batchStatus") String batchStatus);
+	
+	String ecpFinancialPrice_query = "SELECT b.job_instance_id, b.start_time, md.id, ts.id,sp.id , ep.id, count(ep.id) "
+			+ "FROM BatchJobExecution b  INNER JOIN EcpMarketDocument md  ON md.start_date = b.start_time AND md.end_date = b.end_time "
+			+ "INNER JOIN BatchJobInstance bi ON b.job_execution_id = bi.job_instance_id AND bi.job_name = :batchName AND b.status = :batchStatus "
+			+ "INNER JOIN EcpTimeSeries ts ON md.id = ts.ecpmarketdocument_id "
+			+ "INNER JOIN EcpSeriesPeriod sp ON ts.id = sp.ecptimeseries_id "
+			+ "INNER JOIN EcpPoint ep ON sp.id = ep.ecpseriesperiod_id "
+			+ "INNER JOIN EcpFinancialPrice fp ON ep.id = fp.ecppoint_id "
+			+ "group by b.job_instance_id, md.id, ts.id, sp.id, ep.id";
+
+	@Query(ecpFinancialPrice_query)
+	List<Object[]> getEcpPointFinancialPriceTotal(@Param("batchName") String batchName, @Param("batchStatus") String batchStatus);
 }

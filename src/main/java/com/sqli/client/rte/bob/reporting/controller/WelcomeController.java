@@ -47,7 +47,7 @@ public class WelcomeController {
 	private List<EcpStandardOffer> ecpTimeSeries = new ArrayList<EcpStandardOffer>();
 	private List<EcpStandardOffer> ecpSeriesPeriods = new ArrayList<EcpStandardOffer>();
 	private List<EcpStandardOffer> ecpPoints = new ArrayList<EcpStandardOffer>();
-	private List<EcpStandardOffer> ecpFinancialPrice = new ArrayList<EcpStandardOffer>();
+	private List<EcpStandardOffer> ecpFinancialPrices = new ArrayList<EcpStandardOffer>();
 
 	@RequestMapping("/")
 	public String welcome(Map<String, Object> model) {
@@ -60,7 +60,8 @@ public class WelcomeController {
 		ecpTimeSeries.clear();
 		ecpSeriesPeriods.clear();
 		ecpPoints.clear();
-
+		ecpFinancialPrices.clear();
+		
 		for (int i =0; i<chronicleRepository.getPANbChronicles().size(); i++) {
 			CallProgram callProgram = new CallProgram();
 			callProgram.setId((Long) chronicleRepository.getPANbChronicles().get(i)[0]);
@@ -167,6 +168,20 @@ public class WelcomeController {
 			ecpPoints.add(ecpStandardOffer);
 		}
 		model.put("ecpPoints", ecpPoints);
+		
+		List<Object[]> ecpFinancialPricesObj =  ecpMarketDocumentRepository.getEcpPointFinancialPriceTotal("topase", BatchStatus.COMPLETED.toString());
+		for (int i = 0; i < ecpFinancialPricesObj.size(); i++) {
+			EcpStandardOffer ecpStandardOffer = new EcpStandardOffer();
+			ecpStandardOffer.setBatch_id((Long) ecpFinancialPricesObj.get(i)[0]);
+			ecpStandardOffer.setStart_time((Date) ecpFinancialPricesObj.get(i)[1]);
+			ecpStandardOffer.setEcp_document_id(((Long) ecpFinancialPricesObj.get(i)[2]));
+			ecpStandardOffer.setEcp_timeseries_id((Long) ecpFinancialPricesObj.get(i)[3]);
+			ecpStandardOffer.setEcp_seriesperiod_id((Long) ecpFinancialPricesObj.get(i)[4]);
+			ecpStandardOffer.setEcp_point_id((Long) ecpFinancialPricesObj.get(i)[5]);
+			ecpStandardOffer.setEcp_financialprice_Total(((Long) ecpFinancialPricesObj.get(i)[6]).intValue());
+			ecpFinancialPrices.add(ecpStandardOffer);
+		}
+		model.put("ecpFinancialPrices", ecpFinancialPrices);
 
 		return "BOB-Reporting-welcome";
 	}

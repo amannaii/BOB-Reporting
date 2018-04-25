@@ -14,4 +14,10 @@ public class EcpFinancialPrice {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	private long ecppoint_id;
+	public long getEcppoint_id() {
+		return ecppoint_id;
+	}
+	public void setEcppoint_id(long ecppoint_id) {
+		this.ecppoint_id = ecppoint_id;
+	}
 }
