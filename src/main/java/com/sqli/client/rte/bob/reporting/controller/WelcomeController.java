@@ -22,22 +22,22 @@ import com.sqli.client.rte.bob.reporting.model.SygaBatchExecution;
 public class WelcomeController {
 
 	private static final String SYGA_BATCH = "syga";
-	
-    @Autowired
-    CallProgramRepository callProgramRepository;
-    
-    @Autowired
-    ChronicleRepository chronicleRepository;
-    
-    @Autowired
-    PointRepository pointRepository;
-    
-    @Autowired
-    BatchRepository batchRepository;
-    
-    @Autowired
+
+	@Autowired
+	CallProgramRepository callProgramRepository;
+
+	@Autowired
+	ChronicleRepository chronicleRepository;
+
+	@Autowired
+	PointRepository pointRepository;
+
+	@Autowired
+	BatchRepository batchRepository;
+
+	@Autowired
 	EcpMarketDocumentRepository ecpMarketDocumentRepository;
-    
+
 	private List<CallProgram> callPrograms = new ArrayList<CallProgram>();
 	private List<Chronicle> chronics = new ArrayList<Chronicle>();
 	private List<SygaBatchExecution> sygaBatchExecutions = new ArrayList<SygaBatchExecution>();
@@ -46,9 +46,9 @@ public class WelcomeController {
 	private List<SygaBatchExecution> ecpMarketDocument = new ArrayList<SygaBatchExecution>();
 	private List<EcpStandardOffer> ecpTimeSeries = new ArrayList<EcpStandardOffer>();
 	private List<EcpStandardOffer> ecpSeriesPeriods = new ArrayList<EcpStandardOffer>();
-	private List<EcpStandardOffer> ecpPoint = new ArrayList<EcpStandardOffer>();
+	private List<EcpStandardOffer> ecpPoints = new ArrayList<EcpStandardOffer>();
 	private List<EcpStandardOffer> ecpFinancialPrice = new ArrayList<EcpStandardOffer>();
-	
+
 	@RequestMapping("/")
 	public String welcome(Map<String, Object> model) {
 		model.put("totalCallPrograms", callProgramRepository.count());
@@ -59,6 +59,8 @@ public class WelcomeController {
 		ecpTimeSeries.clear();
 		ecpTimeSeries.clear();
 		ecpSeriesPeriods.clear();
+		ecpPoints.clear();
+
 		for (int i =0; i<chronicleRepository.getPANbChronicles().size(); i++) {
 			CallProgram callProgram = new CallProgram();
 			callProgram.setId((Long) chronicleRepository.getPANbChronicles().get(i)[0]);
@@ -76,7 +78,7 @@ public class WelcomeController {
 			chronics.add(chronicle);
 		}
 		model.put("chronics", chronics);
-		
+
 		//-----------------------------------------------------------------------------
 		//-------------Syga batch execution Report-------------------------------------
 		//-----------------------------------------------------------------------------
@@ -88,9 +90,9 @@ public class WelcomeController {
 			sygaBatchExecution.setStart_time((Date) sygaOffers.get(i)[1]);	
 			sygaBatchExecution.setTotal_offers(((Long) sygaOffers.get(i)[2]).intValue());
 			sygaBatchExecutions.add(sygaBatchExecution);
-			}
+		}
 		model.put("batchExecutions", sygaBatchExecutions);
-		
+
 		List <Object[]> sygaRejectedOffers= batchRepository.getSygaRejectedOffers(SYGA_BATCH, BatchStatus.COMPLETED.toString());
 		for (int i =0; i< sygaRejectedOffers.size(); i++) {
 			SygaBatchExecution sygaBatchExecution = new SygaBatchExecution();
@@ -98,9 +100,9 @@ public class WelcomeController {
 			sygaBatchExecution.setStart_time((Date) sygaRejectedOffers.get(i)[1]);	
 			sygaBatchExecution.setTotal_offers(((Long) sygaRejectedOffers.get(i)[2]).intValue());
 			sygaBatchRejectedOffers.add(sygaBatchExecution);
-			}
+		}
 		model.put("sygaBatchRejectedOffers", sygaBatchRejectedOffers);
-		
+
 		List <Object[]> sygaErroneousOffers= batchRepository.getSygaErrorneousOffers(SYGA_BATCH, BatchStatus.COMPLETED.toString());
 		for (int i =0; i< sygaErroneousOffers.size(); i++) {
 			SygaBatchExecution sygaBatchExecution = new SygaBatchExecution();
@@ -108,16 +110,12 @@ public class WelcomeController {
 			sygaBatchExecution.setStart_time((Date) sygaErroneousOffers.get(i)[1]);	
 			sygaBatchExecution.setTotal_offers(((Long) sygaErroneousOffers.get(i)[2]).intValue());
 			sygaBatchErroneousOffers.add(sygaBatchExecution);
-			}
+		}
 		model.put("sygaBatchErroneousOffers", sygaBatchErroneousOffers);
-		
+
 		//-----------------------------------------------------------------------------
-
-				//-------------ECP* batch execution Report-------------------------------------
-
-				//-----------------------------------------------------------------------------
-
-				
+		//-------------ECP batch execution Report-------------------------------------
+		//-----------------------------------------------------------------------------
 
 		List<Object[]> ecpMarketDocuments = ecpMarketDocumentRepository.getEcpMarketDocument("topase",
 				BatchStatus.COMPLETED.toString());
@@ -130,9 +128,9 @@ public class WelcomeController {
 			ecpMarketDocument.add(sygaBatchExecution);
 		}
 		model.put("ecpMarketDocuments", ecpMarketDocument);
-		
+
 		List<Object[]> ecpTimeSeriesObj =  ecpMarketDocumentRepository.getEcpTimesSeries("topase", BatchStatus.COMPLETED.toString());
-		
+
 		for (int i = 0; i < ecpTimeSeriesObj.size(); i++) {
 			EcpStandardOffer ecpStandardOffer = new EcpStandardOffer();
 			ecpStandardOffer.setBatch_id((Long) ecpTimeSeriesObj.get(i)[0]);
@@ -143,9 +141,9 @@ public class WelcomeController {
 			ecpTimeSeries.add(ecpStandardOffer);
 		}
 		model.put("ecpTimeSeries", ecpTimeSeries);
-		
+
 		List<Object[]> ecpSeriesPeriodObj =  ecpMarketDocumentRepository.getEcpSeriesPeriod("topase", BatchStatus.COMPLETED.toString());
-		
+
 		for (int i = 0; i < ecpSeriesPeriodObj.size(); i++) {
 			EcpStandardOffer ecpStandardOffer = new EcpStandardOffer();
 			ecpStandardOffer.setBatch_id((Long) ecpSeriesPeriodObj.get(i)[0]);
@@ -153,39 +151,23 @@ public class WelcomeController {
 			ecpStandardOffer.setEcp_document_id(((Long) ecpSeriesPeriodObj.get(i)[2]));
 			ecpStandardOffer.setEcp_timeseries_id((Long) ecpSeriesPeriodObj.get(i)[3]);
 			ecpStandardOffer.setEcpseriesperiod_Total(((Long) ecpSeriesPeriodObj.get(i)[4]).intValue());
-		//	ecpStandardOffer.setEcp_seriesperiod_id((Long) ecpSeriesPeriodObj.get(i)[4]);
-		//	ecpStandardOffer.setEcp_point_Total(((Long) ecpSeriesPeriodObj.get(i)[5]).intValue());
 			ecpSeriesPeriods.add(ecpStandardOffer);
 		}
 		model.put("ecpSeriesPeriods", ecpSeriesPeriods);
-		
-		List<Object[]> ecpPointObj =  ecpMarketDocumentRepository.getEcpPoint("topase", BatchStatus.COMPLETED.toString());
 
+		List<Object[]> ecpPointObj =  ecpMarketDocumentRepository.getEcpPoint("topase", BatchStatus.COMPLETED.toString());
 		for (int i = 0; i < ecpPointObj.size(); i++) {
 			EcpStandardOffer ecpStandardOffer = new EcpStandardOffer();
 			ecpStandardOffer.setBatch_id((Long) ecpPointObj.get(i)[0]);
 			ecpStandardOffer.setStart_time((Date) ecpPointObj.get(i)[1]);
 			ecpStandardOffer.setEcp_document_id(((Long) ecpPointObj.get(i)[2]));
 			ecpStandardOffer.setEcp_timeseries_id((Long) ecpPointObj.get(i)[3]);
-			ecpStandardOffer.setEcp_point_id((Long) ecpPointObj.get(i)[4]);
-			ecpStandardOffer.setEcp_financialprice_Total(((Long) ecpPointObj.get(i)[5]).intValue());
-			ecpSeriesPeriods.add(ecpStandardOffer);
+			ecpStandardOffer.setEcp_seriesperiod_id((Long) ecpPointObj.get(i)[4]);
+			ecpStandardOffer.setEcp_point_Total(((Long) ecpPointObj.get(i)[5]).intValue());
+			ecpPoints.add(ecpStandardOffer);
 		}
-		model.put("ecpPoint", ecpPoint);
-		
-//		List<Object[]> ecpFinancialPriceObj =  ecpMarketDocumentRepository.getEcpFinancialPrice("topase", BatchStatus.COMPLETED.toString());
-//
-//		for (int i = 0; i < ecpSeriesPeriodObj.size(); i++) {
-//			EcpStandardOffer ecpStandardOffer = new EcpStandardOffer();
-//			ecpStandardOffer.setBatch_id((Long) ecpFinancialPriceObj.get(i)[0]);
-//			ecpStandardOffer.setStart_time((Date) ecpFinancialPriceObj.get(i)[1]);
-//			ecpStandardOffer.setEcp_document_id(((Long) ecpFinancialPriceObj.get(i)[2]));
-//			ecpStandardOffer.setEcp_timeseries_id((Long) ecpFinancialPriceObj.get(i)[3]);
-//			ecpStandardOffer.setEcp_point_id((Long) ecpPointObj.get(i)[4]);
-//			ecpStandardOffer.setEcpseriesperiod_Total(((Long) ecpFinancialPriceObj.get(i)[4]).intValue());
-//			ecpSeriesPeriod.add(ecpStandardOffer);
-//		}
-//		model.put("ecpFinancialPrice", ecpFinancialPrice);
+		model.put("ecpPoints", ecpPoints);
+
 		return "BOB-Reporting-welcome";
 	}
 }
