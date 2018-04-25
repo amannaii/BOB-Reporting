@@ -148,11 +148,11 @@ public class WelcomeController {
 		
 		for (int i = 0; i < ecpSeriesPeriodObj.size(); i++) {
 			EcpStandardOffer ecpStandardOffer = new EcpStandardOffer();
-//			ecpStandardOffer.setBatch_id((Long) ecpSeriesPeriodObj.get(i)[0]);
-//			ecpStandardOffer.setStart_time((Date) ecpSeriesPeriodObj.get(i)[1]);
-//			ecpStandardOffer.setEcp_document_id(((Long) ecpSeriesPeriodObj.get(i)[2]));
-			ecpStandardOffer.setEcp_timeseries_id((Long) ecpSeriesPeriodObj.get(i)[0]);
-			ecpStandardOffer.setEcpseriesperiod_Total(((Long) ecpSeriesPeriodObj.get(i)[1]).intValue());
+			ecpStandardOffer.setBatch_id((Long) ecpSeriesPeriodObj.get(i)[0]);
+			ecpStandardOffer.setStart_time((Date) ecpSeriesPeriodObj.get(i)[1]);
+			ecpStandardOffer.setEcp_document_id(((Long) ecpSeriesPeriodObj.get(i)[2]));
+			ecpStandardOffer.setEcp_timeseries_id((Long) ecpSeriesPeriodObj.get(i)[3]);
+			ecpStandardOffer.setEcpseriesperiod_Total(((Long) ecpSeriesPeriodObj.get(i)[4]).intValue());
 		//	ecpStandardOffer.setEcp_seriesperiod_id((Long) ecpSeriesPeriodObj.get(i)[4]);
 		//	ecpStandardOffer.setEcp_point_Total(((Long) ecpSeriesPeriodObj.get(i)[5]).intValue());
 			ecpSeriesPeriods.add(ecpStandardOffer);

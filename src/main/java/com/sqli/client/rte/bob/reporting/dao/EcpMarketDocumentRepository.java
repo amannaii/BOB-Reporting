@@ -41,7 +41,7 @@ public interface EcpMarketDocumentRepository extends JpaRepository<EcpMarketDocu
 	List<Object[]> getEcpTimesSeries(@Param("batchName") String batchName, @Param("batchStatus") String batchStatus); 
 	
 	//b.job_instance_id, b.start_time, md.id,
-	 String ecpSeriesPeriod_query = "SELECT ts.id, count(sp.id)  " + 
+	 String ecpSeriesPeriod_query = "SELECT b.job_instance_id, b.start_time, md.id, ts.id, count(sp.id)  " + 
 	 		"			FROM EcpMarketDocument md , BatchJobExecution b, BatchJobInstance bi, EcpTimeSeries ts, EcpSeriesPeriod sp" + 
 	 		"			where md.start_date = b.start_time" + 
 	 		"			and md.end_date = b.end_time  	" + 
