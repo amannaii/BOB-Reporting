@@ -133,6 +133,100 @@ hr.style-four {
 			</table>
 		</div>
 
+
+
+			<div class="p-3 mb-2 bg-primary text-white">
+			
+			<h2>
+				<span
+					th:text="'Nombre d\'enregistrements  suite a l\'éxecution du Batch ECP'"></span>
+			</h2>
+			</div>
+			<table class="table table-striped">
+				<tr>
+					<th>Identifiant du Ecp batch</th>
+					<th>Ecp batch start time</th>
+					<th>Nombre d'enregistrement</th>
+				</tr>
+				<tr th:each="ecpMarketDocument : ${ecpMarketDocuments}">
+					<td><span th:text="${ecpMarketDocument.batch_id}"></td>
+					<td><span th:text="${ecpMarketDocument.start_time}"></td>
+					<td><span th:text="${ecpMarketDocument.total_offers}"></td>
+				</tr>
+			</table>
+			
+			
+			<div class="p-3 mb-2 bg-primary text-white">
+			
+			<h2>
+				<span
+					th:text="'Nombre d\'enregistrements dans ECP MARKET DOCUMENT suite a l\'éxecution du Batch ECP'"></span>
+			</h2>
+			</div>
+			<table class="table table-striped">
+				<tr>
+					<th>Identifiant du Ecp batch</th>
+					<th>Ecp batch start time</th>
+					<th>Identifiant du Ecp Document</th>
+					<th>Nombre de EcpTimeSeries enregistrés</th>
+				</tr>
+				<tr th:each="ecpTimeSerie : ${ecpTimeSeries}">
+					<td><span th:text="${ecpTimeSerie.batch_id}"></td>
+					<td><span th:text="${ecpTimeSerie.start_time}"></td>
+					<td><span th:text="${ecpTimeSerie.ecp_document_id}"></td>
+					<td><span th:text="${ecpTimeSerie.ecpTimeSeries_Total}"></td>
+				</tr>
+			</table>
+			
+			<div class="p-3 mb-2 bg-primary text-white">
+			
+			<h2>
+				<span
+					th:text="'Nombre d\'enregistrements des EcpSeriesPeriod pour chaque EcpTimeSeries'"></span>
+			</h2>
+			</div>
+			<table class="table table-striped">
+				<tr>
+					<th>Identifiant du Ecp batch</th>
+					<th>Ecp batch start time</th>
+					<th>Identifiant du Ecp Document</th>
+					<th>Identifiant du Ecp Time Series</th>
+					<th>Nombre de EcpSeriesPeriod enregistrés</th>
+				</tr>
+				<tr th:each="ecpSeriesPeriod : ${ecpSeriesPeriods}">
+					<td><span th:text="${ecpSeriesPeriod.batch_id}"></td>
+					<td><span th:text="${ecpSeriesPeriod.start_time}"></td>
+					<td><span th:text="${ecpSeriesPeriod.ecp_document_id}"></td>
+					<td><span th:text="${ecpSeriesPeriod.ecp_timeseries_id}"></td>
+					<td><span th:text="${ecpSeriesPeriod.ecpseriesperiod_Total}"></td>
+				</tr>
+			</table>
+			
+				<div class="p-3 mb-2 bg-primary text-white">
+			
+			<h2>
+				<span
+					th:text="'Nombre d\'enregistrements des EcpSeriesPoint pour chaque EcpSeriesPeriod'"></span>
+			</h2>
+			</div>
+		<!-- 	<table class="table table-striped">
+				<tr>
+					<th>Identifiant du Ecp batch</th>
+					<th>Ecp batch start time</th>
+					<th>Identifiant du Ecp Document</th>
+					<th>Identifiant du Ecp Time Series</th>
+					<th>Identifiant du Ecp Series Period</th>
+					<th>Nombre de EcpSeriesPoint enregistrés</th>
+				</tr>
+				<tr th:each="ecpSeriesPeriod : ${ecpSeriesPeriods}">
+					<td><span th:text="${ecpSeriesPeriod.batch_id}"></td>
+					<td><span th:text="${ecpSeriesPeriod.start_time}"></td>
+					<td><span th:text="${ecpSeriesPeriod.ecp_document_id}"></td>
+					<td><span th:text="${ecpSeriesPeriod.ecp_timeseries_id}"></td>
+					<td><span th:text="${ecpSeriesPeriod.ecp_seriesperiod_id}"></td>
+					<td><span th:text="${ecpSeriesPeriod.ecp_point_Total}"></td>
+				</tr>
+			</table> -->
 	</div>
 
 	<script type="text/javascript"
